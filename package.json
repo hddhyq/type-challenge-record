@@ -1,0 +1,23 @@
+{
+  "name": "type-challenge-record",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hddhyq/type-challenge-record.git"
+  },
+  "keywords": [],
+  "author": "hddhyq <brokenbonesdd@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hddhyq/type-challenge-record/issues"
+  },
+  "homepage": "https://github.com/hddhyq/type-challenge-record#readme",
+  "devDependencies": {
+    "@type-challenges/utils": "^0.1.1"
+  }
+}
