@@ -25,6 +25,8 @@ type MyReadonly<T> = {
   readonly [K in keyof T]: T[K]
 }
 
+// 要点：接口使用 keyof 遍历
+
 // type cases = [
 //   Expect<Equal<MyReadonly<Todo1>, Readonly<Todo1>>>,
 // ]
@@ -43,6 +45,8 @@ type TupleToObject<T extends readonly any[]> = {
   [K in T[number]]: K
 }
 
+// 要点：元组 [number] 作为遍历手段
+
 // const tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const
 // const tupleNumber = [1, 2, 3, 4] as const
 // const tupleMix = [1, '2', 3, '4'] as const
@@ -58,6 +62,8 @@ type TupleToObject<T extends readonly any[]> = {
 
 /** 14 - 第一个元素 */
 type First<T extends any[]> = T extends [infer F, ...any] ? F : never
+
+// 要点：infer 推断类型
 
 // type cases = [
 //   Expect<Equal<First<[3, 2, 1]>, 3>>,
@@ -76,6 +82,8 @@ type First<T extends any[]> = T extends [infer F, ...any] ? F : never
 /** 18 - 获取元组长度 */
 type Length<T extends readonly any[]> = T['length']
 
+// 要点：元组 ['length'] 返回长度，数组 ['length'] 返回 number
+
 // const tesla = ['tesla', 'model 3', 'model X', 'model Y'] as const
 // const spaceX = ['FALCON 9', 'FALCON HEAVY', 'DRAGON', 'STARSHIP', 'HUMAN SPACEFLIGHT'] as const
 
@@ -88,3 +96,11 @@ type Length<T extends readonly any[]> = T['length']
 //   Length<'hello world'>,
 // ]
 
+/** 43 - Exclude */
+type MyExclude<T, U> = T extends U ? never : T
+
+// type cases = [
+//   Expect<Equal<MyExclude<'a' | 'b' | 'c', 'a'>, Exclude<'a' | 'b' | 'c', 'a'>>>,
+//   Expect<Equal<MyExclude<'a' | 'b' | 'c', 'a' | 'b'>, Exclude<'a' | 'b' | 'c', 'a' | 'b'>>>,
+//   Expect<Equal<MyExclude<string | number | (() => void), Function>, Exclude<string | number | (() => void), Function>>>,
+// ]
