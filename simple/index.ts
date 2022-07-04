@@ -41,7 +41,7 @@ type MyReadonly<T> = {
 // }
 
 /** 11 - 元组转换为对象 */
-type TupleToObject<T extends readonly any[]> = {
+type TupleToObject<T extends ReadonlyArray<PropertyKey>> = {
   [K in T[number]]: K
 }
 
