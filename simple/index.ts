@@ -104,3 +104,24 @@ type MyExclude<T, U> = T extends U ? never : T
 //   Expect<Equal<MyExclude<'a' | 'b' | 'c', 'a' | 'b'>, Exclude<'a' | 'b' | 'c', 'a' | 'b'>>>,
 //   Expect<Equal<MyExclude<string | number | (() => void), Function>, Exclude<string | number | (() => void), Function>>>,
 // ]
+
+/** 189 - Awaited */
+// [original article](https://dev.to/macsikora/advanced-typescript-exercises-question-1-45k4)
+// my answer
+// type MyAwaited<T extends PromiseLike<any>> = T extends PromiseLike<infer E> ? MyAwaited<E> : T
+type MyAwaited<T> = T extends Promise<infer P> ? (P extends Promise<any> ? MyAwaited<P> : P) : error;
+
+// type X = Promise<string>
+// type Y = Promise<{ field: number }>
+// type Z = Promise<Promise<string | number>>
+// type Z1 = Promise<Promise<Promise<string | boolean>>>
+
+// type cases = [
+//   Expect<Equal<MyAwaited<X>, string>>,
+//   Expect<Equal<MyAwaited<Y>, { field: number }>>,
+//   Expect<Equal<MyAwaited<Z>, string | number>>,
+//   Expect<Equal<MyAwaited<Z1>, string | boolean>>,
+// ]
+
+// // @ts-expect-error
+// type error = MyAwaited<number>

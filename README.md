@@ -1,6 +1,7 @@
 # type-challenge-record
 
-[TS 学习笔记](https://www.processon.com/view/link/62c14da31e085372914ec515)
+* [challenge 地址](https://github.com/type-challenges/type-challenges/blob/main/README.zh-CN.md)
+* [TS 学习笔记](https://www.processon.com/view/link/62c14da31e085372914ec515)
 ## 要点
 
 类型物件，类型编程基础
