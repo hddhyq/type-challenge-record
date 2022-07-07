@@ -61,7 +61,7 @@ type TupleToObject<T extends ReadonlyArray<PropertyKey>> = {
 // type error = TupleToObject<[[1, 2], {}]>
 
 /** 14 - 第一个元素 */
-type First<T extends any[]> = T extends [infer F, ...any] ? F : never
+type First<T extends unknown[]> = T extends [infer F, ...any] ? F : never
 
 // 要点：infer 推断类型
 
@@ -80,12 +80,12 @@ type First<T extends any[]> = T extends [infer F, ...any] ? F : never
 // ]
 
 /** 18 - 获取元组长度 */
-type Length<T extends readonly any[]> = T['length']
+type Length<T extends readonly unknown[]> = T['length']
 
 // 要点：元组 ['length'] 返回长度，数组 ['length'] 返回 number
 
-// const tesla = ['tesla', 'model 3', 'model X', 'model Y'] as const
-// const spaceX = ['FALCON 9', 'FALCON HEAVY', 'DRAGON', 'STARSHIP', 'HUMAN SPACEFLIGHT'] as const
+const tesla = ['tesla', 'model 3', 'model X', 'model Y'] as const
+const spaceX = ['FALCON 9', 'FALCON HEAVY', 'DRAGON', 'STARSHIP', 'HUMAN SPACEFLIGHT'] as const
 
 // type cases = [
 //   Expect<Equal<Length<typeof tesla>, 4>>,
@@ -195,4 +195,17 @@ type Unshift<T extends unknown[], U> = [U, ...T]
 //   Expect<Equal<Unshift<[], 1>, [1]>>,
 //   Expect<Equal<Unshift<[1, 2], 0>, [0, 1, 2]>>,
 //   Expect<Equal<Unshift<['1', 2, '3'], boolean>, [boolean, '1', 2, '3']>>,
+// ]
+
+/** 3312 - Parameters */
+type MyParameters<T extends (...args: any[]) => unknown> = T extends (...args: infer P) => unknown ? P : never
+
+// const foo = (arg1: string, arg2: number): void => {}
+// const bar = (arg1: boolean, arg2: { a: 'A' }): void => {}
+// const baz = (): void => {}
+
+// type cases = [
+//   Expect<Equal<MyParameters<typeof foo>, [string, number]>>,
+//   Expect<Equal<MyParameters<typeof bar>, [boolean, { a: 'A' }]>>,
+//   Expect<Equal<MyParameters<typeof baz>, []>>,
 // ]
