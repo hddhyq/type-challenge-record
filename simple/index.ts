@@ -180,10 +180,19 @@ type Includes<T extends readonly unknown[], U> =
 // ]
 
 /** 3057 - Push */
-type Push<T extends any[], U> = [...T, U]
+type Push<T extends unknown[], U> = [...T, U]
 
 // type cases = [
 //   Expect<Equal<Push<[], 1>, [1]>>,
 //   Expect<Equal<Push<[1, 2], '3'>, [1, 2, '3']>>,
 //   Expect<Equal<Push<['1', 2, '3'], boolean>, ['1', 2, '3', boolean]>>,
+// ]
+
+/** 3060 - Unshift */
+type Unshift<T extends unknown[], U> = [U, ...T]
+
+// type cases = [
+//   Expect<Equal<Unshift<[], 1>, [1]>>,
+//   Expect<Equal<Unshift<[1, 2], 0>, [0, 1, 2]>>,
+//   Expect<Equal<Unshift<['1', 2, '3'], boolean>, [boolean, '1', 2, '3']>>,
 // ]
