@@ -198,7 +198,7 @@ type Unshift<T extends unknown[], U> = [U, ...T]
 // ]
 
 /** 3312 - Parameters */
-type MyParameters<T extends (...args: any[]) => unknown> = T extends (...args: infer P) => unknown ? P : never
+type MyParameters<T> = T extends (...args: infer P) => unknown ? P : never
 
 // const foo = (arg1: string, arg2: number): void => {}
 // const bar = (arg1: boolean, arg2: { a: 'A' }): void => {}
