@@ -1,4 +1,4 @@
-import type { Equal, Expect } from '@type-challenges/utils'
+import type { Alike, Equal, Expect } from '@type-challenges/utils'
 
 /** 2 - ReturnType */
 type MyReturnType<T> = T extends (...args:any[])=> infer R ? R : never
@@ -55,4 +55,35 @@ type MyOmit2<T, K extends keyof T> = {
 
 // interface Expected2 {
 //   title: string
+// }
+
+/** 8 - Readonly 2 */
+type MyReadonly2<T, K extends keyof T = keyof T> = {
+  readonly [P in K]: T[P];
+} & Omit<T, K>
+
+// 默认值，Omit知识点
+
+// type cases = [
+//   Expect<Alike<MyReadonly2<Todo1>, Readonly<Todo1>>>,
+//   Expect<Alike<MyReadonly2<Todo1, 'title' | 'description'>, Expected>>,
+//   Expect<Alike<MyReadonly2<Todo2, 'title' | 'description'>, Expected>>,
+// ]
+
+// interface Todo1 {
+//   title: string
+//   description?: string
+//   completed: boolean
+// }
+
+// interface Todo2 {
+//   readonly title: string
+//   description?: string
+//   completed: boolean
+// }
+
+// interface Expected {
+//   readonly title: string
+//   readonly description?: string
+//   completed: boolean
 // }
