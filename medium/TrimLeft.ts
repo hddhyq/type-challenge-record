@@ -18,9 +18,10 @@
 
 
 /* _____________ Your Code Here _____________ */
+type Whitespace = ' ' | '\n' | '\r' | '\t'
+type TrimLeft<S extends string> = S extends `${Whitespace}${infer R}` ? TrimLeft<R> : S
 
-type TrimLeft<S extends string> = any
-
+// https://github.com/microsoft/TypeScript/pull/40336
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
