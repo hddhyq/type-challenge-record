@@ -31,9 +31,7 @@
 /* _____________ 你的代码 _____________ */
 // type ValueOf<T> = T[keyof T]
 // type LookUp<U, T> = ValueOf<U> extends T ? U : never
-type LookUp<U, T extends string> = {
-  [K in T]: U extends { type: T } ? U : never
-}[T]
+type LookUp<U, T> = U extends { type: T } ? U : never
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
